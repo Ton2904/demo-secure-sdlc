@@ -1,0 +1,22 @@
+name: Secure SDLC Pipeline (SAST Scan)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  security-scan:
+    name: Semgrep SAST Scan
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Security Scan
+        run: semgrep scan --config=p/security-audit --error --verbose
+        # Lệnh này sẽ quét code. Nếu thấy lỗi bảo mật, nó sẽ báo lỗi (Exit code 1) và làm pipeline đỏ rực.
