@@ -18,5 +18,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Security Scan
-        run: semgrep scan --config=p/security-audit --error --verbose
+        run: semgrep scan --config=p/default --error --verbose
         # Lệnh này sẽ quét code. Nếu thấy lỗi bảo mật, nó sẽ báo lỗi (Exit code 1) và làm pipeline đỏ rực.
